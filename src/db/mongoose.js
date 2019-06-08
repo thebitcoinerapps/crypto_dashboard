@@ -1,24 +1,45 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
-mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
+module.exports = mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
     useNewUrlParser: true,
     useCreateIndex: true
 });
 
-const User = mongoose.model('User', {
-    name: {
-        type: String
-    },
-    age: {
-        type: Number
-    }
-});
-const me = new User({
-    name: 'Marek',
-    age: 30
-});
-me.save().then((me)=>{
-    console.log(me);
-}).catch((e)=>{
-     console.log(e);
-});
+// const User = mongoose.model('User', {
+//     name: {
+//         type: String,
+//         //to made a field required use required property
+//         required: true,
+//         trim: true
+//     },
+//     age: {
+//         type: Number,
+//         validate(value){
+//             if(value < 30){
+//                 throw new Error('Age must be than 30');
+//             }
+//         }
+//     },
+//     email: {
+//       type: String,
+//       required: true,
+//       trim: true,
+//       lowercase: true,
+//       validate(value){
+//         if(!validator.isEmail(value)){
+//             throw new Error('This is not an emial');
+//         };
+//     }}
+
+// });
+// const me = new User({
+//     name: 'Marek',
+//     age: 30,
+//     email: 'marek@example.com'
+// });
+// me.save().then((me)=>{
+//     console.log(me);
+// }).catch((e)=>{
+//      console.log(e);
+// });
