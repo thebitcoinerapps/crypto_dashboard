@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports =  Item = mongoose.model('User', {
+  const User = mongoose.model('User', {
     name: {
         type: String,
         required: true
@@ -10,8 +10,14 @@ module.exports =  Item = mongoose.model('User', {
         required: true,
         /*TODO add validation */
     },
+    password: {
+        type: String,
+        required: true,
+        //add validation
+    },
     holdings: {
         type: Array
     }
-
 });
+
+module.exports = User;
