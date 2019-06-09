@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = new express.Router();
 const User = require('../db/models/user');
+const Item = require('../db/models/listing');
+
+let currentId = '';
+let cryptoNames = [];
+let newHoldings = [];
 
 mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
     useNewUrlParser: true,
@@ -51,6 +56,33 @@ router.get('/:id/dashboard', (req, res)=>{
     User.findById(req.params.id, (err, user)=>{
         res.render('dashboard', {user: user});
     });
+});
+//adding 
+router.post('/add', (req, res)=>{
+    currentId = req.body.id;
+    res.redirect('/addCrypto');
+});
+router.get('/addCrypto', (req, res)=>{
+    Item.find({},(err, listing)=>{
+        cryptoNames = listing;
+    }).then(()=>{
+        res.render('addCrypto',{currentId: currentId, listings: cryptoNames});
+    })
+    
+})
+//handling added asset
+router.post('/addtoportfolio', (req, res)=>{
+    const {id} = req.body;
+    User.findOne({email:'marek@example.com'}, (err, user)=>{
+        newHoldings = Array.from(user.holdings);
+        newHoldings.push(req.body);
+    }).then(()=>{
+        User.updateOne({email: 'marek@example.com'}, {holdings: newHoldings}, (err, status)=>{
+            console.log(status);
+        });
+    }).then(()=>{
+        res.redirect(`/${id}/dashboard`)
+    })
 });
 
 

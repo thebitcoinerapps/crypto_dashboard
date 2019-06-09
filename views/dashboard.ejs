@@ -40,7 +40,18 @@
                     <div class="card shadow-sm" style="width: 90%; margin: auto; height: 95%; margin-top: 0.4rem;">
                         <div class="card-body">
                                 <h5 class="card-title">My Portfolio</h5>
-                                <button type="button" class="btn btn-primary">Add</button>
+                                <%if(user.holdings<1){%>
+                                    <p>Currently you have no assets</p>
+                                <%}else{%>
+                                    <%for(let i = 0; i<user.holdings.length; i++){%>
+                                            <p><%=user.holdings[i].coin_name%></p>
+                                    <%}%>
+                                <%}%>
+                                <form method="POST" action="/add">
+                                <input name="id" style="display: none" value="<%=user._id.toString()%>">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+
                         </div>
                     </div>
             </div>

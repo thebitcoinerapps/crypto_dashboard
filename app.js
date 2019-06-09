@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Item = require('./src/db/models/listing');
-const User = require('./src/db/models/user');
 
 const getLatestListing = require('./src/utils/getLatest');
 
@@ -31,15 +30,3 @@ getLatestListing.then((response)=>{
 }).catch((error)=>{
     console.log(error);
 });
-
-const marek = new User({
-    name: 'Marek',
-    email: 'marek@example.com',
-    holdings: [{name: 'Bitcoin', id: 1},{name: 'Ripple', id: 2},{name: 'Etherum', id: 3}]
-});
-
-marek.save().then((user)=>{
-    console.log(user);
-}).catch((error)=>{
-    console.log(error);
-})

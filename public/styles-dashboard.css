@@ -31,7 +31,7 @@ body{
     height: 60%;
 }
 
-
+/*add query to all boxes look the same*/
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
