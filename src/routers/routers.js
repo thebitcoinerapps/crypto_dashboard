@@ -40,12 +40,15 @@ router.post('/validation', (req, res)=>{
 router.post('/login', (req, res)=>{
 
     const {email, password} = req.body;
-
-    User.find({email: email}).then((user)=>{
-        if(user.length < 1){
+    let user = {};
+    User.findOne({email: email}, (err, user)=>{
+       user = user;
+    }).then((user)=>{
+        if(user.password != password){
             res.redirect('/');
-        }else if(user[0].password = password){
-            const id = user[0]._id.toString();
+        }else if(user.password = password){
+            let id = user._id.toString();
+            console.log(id);
             res.redirect(`/${id}/dashboard`)
         }
     });
@@ -73,11 +76,12 @@ router.get('/addCrypto', (req, res)=>{
 //handling added asset
 router.post('/addtoportfolio', (req, res)=>{
     const {id} = req.body;
-    User.findOne({email:'marek@example.com'}, (err, user)=>{
+    const objId = new mongoose.mongo.ObjectID(id);
+    User.findOne({_id:objId}, (err, user)=>{
         newHoldings = Array.from(user.holdings);
         newHoldings.push(req.body);
     }).then(()=>{
-        User.updateOne({email: 'marek@example.com'}, {holdings: newHoldings}, (err, status)=>{
+        User.updateOne({_id: objId}, {holdings: newHoldings}, (err, status)=>{
             console.log(status);
         });
     }).then(()=>{
