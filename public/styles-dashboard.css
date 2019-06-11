@@ -40,5 +40,16 @@ body{
     }
     .dashboard-container{
         flex-direction: column;
+        align-items: center;
+    }
+    .dashboard-portfolio{
+        width: 95%;
+    }
+    .dashboard-pnl-market{
+        width: 95%;
+        margin-bottom: 0.5rem;
+    }
+    .dashboard-pnl{
+        margin-bottom: 0.5rem;
     }
   }
