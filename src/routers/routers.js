@@ -3,6 +3,7 @@ const express = require('express');
 const router = new express.Router();
 const User = require('../db/models/user');
 const Item = require('../db/models/listing');
+const bcrypt = require('bcryptjs');
 
 let currentId = '';
 let cryptoNames = [];
@@ -35,7 +36,7 @@ router.post('/validation', (req, res)=>{
         res.redirect(`/${id}/dashboard`)
     }).catch((err)=>{
         console.log(err);
-        res.redirect('loginPage',{msg: 'Error occured'});
+        res.render('loginPage', {msg: 'Users exists'});
     });
 });
 //login existing users
@@ -49,15 +50,19 @@ router.post('/login', (req, res)=>{
         }
         user = user;
     }).then((user)=>{
-        if(user.password != password){
-            res.redirect('/');
-        }else if(user.password = password){
-            let id = user._id.toString();
-            console.log(id);
-            res.redirect(`/${id}/dashboard`)
-        }
-    });
-})
+        const checkPass = async () => {
+            let check = bcrypt.compare(password, user.password);
+            return check;
+            }
+            checkPass().then((check)=>{
+                if(check){
+                    let id = user._id.toString();
+                    res.redirect(`/${id}/dashboard`)
+                }else{
+                    res.render('loginPage', {msg: 'Wrong password'});
+                }
+            });
+    })});
 //daschboard
 
 router.get('/:id/dashboard', (req, res)=>{
