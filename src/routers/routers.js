@@ -18,12 +18,11 @@ router.use(express.urlencoded({ extended: false }));
 
 router.get('/', (req, res)=>{
     //read cookies and logon automatically
-    res.render('loginPage');
+    res.render('loginPage', {msg: ''});
 });
 
 //validation and signing up new users
 router.post('/validation', (req, res)=>{
-    console.log(req.body);
     const {name, email, password} = req.body;
     const newUser = new User({
         name,
@@ -32,8 +31,11 @@ router.post('/validation', (req, res)=>{
     });
     newUser.save().then((user)=>{
         console.log(user);
+        let id = user._id.toString();
+        res.redirect(`/${id}/dashboard`)
     }).catch((err)=>{
         console.log(err);
+        res.redirect('loginPage',{msg: 'Error occured'});
     });
 });
 //login existing users
@@ -42,7 +44,10 @@ router.post('/login', (req, res)=>{
     const {email, password} = req.body;
     let user = {};
     User.findOne({email: email}, (err, user)=>{
-       user = user;
+        if(user === null){
+            res.render('loginPage', {msg: 'User not found'});
+        }
+        user = user;
     }).then((user)=>{
         if(user.password != password){
             res.redirect('/');
