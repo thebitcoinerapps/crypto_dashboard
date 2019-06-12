@@ -43,8 +43,35 @@
                                 <%if(user.holdings<1){%>
                                     <p>Currently you have no assets</p>
                                 <%}else{%>
+                                    <div class="crypto-portfolio-listing">
+                                            <div class="column">
+                                                    <p>Name</p>
+                                                </div>
+                                                <div class="column">
+                                                    <p>BUY price</p>
+                                                </div>
+                                                <div class="column">
+                                                    <p>Quantity</p>
+                                                </div>
+                                                <div class="column">
+                                                    <p>Value</p>
+                                                </div>
+                                    </div>
                                     <%for(let i = 0; i<user.holdings.length; i++){%>
-                                            <p><%=user.holdings[i].coin_name%></p>
+                                            <div class="crypto-portfolio-listing">
+                                                    <div class="column">
+                                                        <p><%=user.holdings[i].coin_name%></p>
+                                                    </div>
+                                                    <div class="column">
+                                                        <p><%=user.holdings[i].price%></p>
+                                                    </div>
+                                                    <div class="column">
+                                                        <p>0.013</p>
+                                                    </div>
+                                                    <div class="column">
+                                                        <p>2345</p>
+                                                    </div>
+                                                </div>
                                     <%}%>
                                 <%}%>
                                 <form method="POST" action="/add">

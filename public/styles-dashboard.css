@@ -30,7 +30,15 @@ body{
 .dashboard-market{
     height: 60%;
 }
-
+.crypto-portfolio-listing{
+    display: flex;
+    justify-content: flex-start;
+}
+.column{
+    text-align: left;
+    margin-right: 1rem;
+    width: 25%;
+}
 /*add query to all boxes look the same*/
 
 @media only screen and (max-width: 768px) {
