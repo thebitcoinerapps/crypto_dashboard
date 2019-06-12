@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Item = require('./src/db/models/listing');
 const High_item = require('./src/db/models/listingHighestReturn');
+const Url = require('./src/db/models/urls');
 
 
 const getLatestListing = require('./src/utils/getLatest');
@@ -31,10 +32,17 @@ getLatestHighestReturn.then((response)=>{
         symoblsArray.push(coin.symbol);
     });
     const symbols = symoblsArray.join();
-    getMetaData(symbols).then((res)=>{
-        console.log(symbols);
-        console.log(res.data.data);
-    })
+    getMetaData(symbols).then((metaData)=>{
+        const meta = metaData.data.data;
+        const metaArr = JSON.parse(JSON.stringify(meta));
+        //save url to photo to db
+        symoblsArray.forEach((sym)=>{
+            const url = new Url({
+                symbol: sym,
+                url: metaArr[sym].logo
+            }).save();
+        })
+    });
 
     highestReturnArr.forEach((coin)=>{
         const item = new High_item({
