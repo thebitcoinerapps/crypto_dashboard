@@ -86,9 +86,9 @@ router.get('/addCrypto', (req, res)=>{
 })
 //handling added asset
 router.post('/addtoportfolio', (req, res)=>{
+
     const newHolding = req.body;
     const {id} = req.body;
-    //do search for price here then modifie body to have current price and add to database
     const {coin_name} = req.body;
     try{
         Item.findOne({name: coin_name}, (err, item)=>{
