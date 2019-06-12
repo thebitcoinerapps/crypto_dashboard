@@ -94,7 +94,29 @@
                 <div class="dashboard-market">
                         <div class="card shadow-sm" style="width: 90%; margin: auto; height: 93%;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Market</h5>
+                                    <h5 class="card-title">Market Preview</h5>
+                                    <p>Top Gainers (7 days)</p>
+                                    <div class="market-preview-container">
+                                        <div class="mpr_column">
+                                            <%for(let i = 0; i<5; i++){%>
+                                                <div class="img-top-gainer">
+                                                <img style="margin-right: 1rem" src=<%=topUrls[i].url%>>
+                                                <p><%=topGArr[i].name%></p>
+                                                <p class="last-item"><%=topGArr[i].percent_change_7d%>%</p>
+                                                </div>
+                                            <%}%>
+                                        </div>
+                                        <div class="mpr_column">
+                                                <ul>
+                                                    <li>Bitcoin</li>
+                                                    <li>Bitcoin</li>
+                                                    <li>Bitcoin</li>
+                                                    <li>Bitcoin</li>
+                                                    <li>Bitcoin</li>
+                                                    <li>Bitcoin</li>
+                                                </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                 </div>

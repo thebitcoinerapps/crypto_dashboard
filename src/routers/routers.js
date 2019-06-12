@@ -18,6 +18,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
+const topGainersDB = require('../db/models/listingHighestReturn');
+const topGainersDBurls = require('../db/models/urls');
+let topGainersArr = [];
+let topGainersUrlArr = [];
+
+
 router.get('/', (req, res)=>{
     //read cookies and logon automatically
     res.render('loginPage', {msg: ''});
@@ -67,8 +73,14 @@ router.post('/login', (req, res)=>{
 //daschboard
 
 router.get('/:id/dashboard', (req, res)=>{
+    topGainersDB.find({}, (err, topgainers)=>{
+        topGainersArr = topgainers;
+    });
+    topGainersDBurls.find({}, (err, topgainersUrls)=>{
+        topGainersUrlArr = topgainersUrls;
+    });
     User.findById(req.params.id, (err, user)=>{
-        res.render('dashboard', {user: user});
+        res.render('dashboard', {user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr});
     });
 });
 //adding 

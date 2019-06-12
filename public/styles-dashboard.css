@@ -39,6 +39,29 @@ body{
     margin-right: 1rem;
     width: 25%;
 }
+.market-preview-container{
+    display: flex;
+    justify-content: space-around;
+}
+.mpr_column{
+    width: 50%;
+}
+.img-top-gainer{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+.img-top-gainer>img{
+    height: 2rem;
+}
+.img-top-gainer>p{
+    padding-top: 0.2rem;
+    margin-right: 0.5rem;
+}
+.last-item{
+justify-self: flex-end;
+}
+
 /*add query to all boxes look the same*/
 
 @media only screen and (max-width: 768px) {
