@@ -15,12 +15,12 @@ let listingArray = [];
 getLatestListing.then((response)=>{
     const listing = response.data.data;
     listingArray = Array.from(JSON.parse(JSON.stringify(listing)));
-
     listingArray.forEach((coin)=>{
         const item = new Item({
             coinId: coin.id,
             name: coin.name,
-            symbol: coin.symbol
+            symbol: coin.symbol,
+            quote: coin.quote.USD.price
         });
         item.save().then((item)=>{
         }).catch((error)=>{

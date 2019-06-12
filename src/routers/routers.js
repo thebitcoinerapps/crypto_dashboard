@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 let currentId = '';
 let cryptoNames = [];
 let newHoldings = [];
+let currentPrices = [];
 
 mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
     useNewUrlParser: true,
@@ -85,11 +86,30 @@ router.get('/addCrypto', (req, res)=>{
 })
 //handling added asset
 router.post('/addtoportfolio', (req, res)=>{
+    const newHolding = req.body;
     const {id} = req.body;
+    //do search for price here then modifie body to have current price and add to database
+    const {coin_name} = req.body;
+    try{
+        Item.findOne({name: coin_name}, (err, item)=>{
+            newHolding.currentPrice = item.quote;
+            console.log(newHolding);
+        });
+    }catch{
+
+    }
+
+
     const objId = new mongoose.mongo.ObjectID(id);
     User.findOne({_id:objId}, (err, user)=>{
         newHoldings = Array.from(user.holdings);
-        newHoldings.push(req.body);
+        newHoldings.push(newHolding);
+            // newHoldings.forEach((holding)=>{
+            //     Item.findOne({name: holding.coin_name}, (err, coin)=>{
+            //         holding.newPrice = coin.quote;
+            //         console.log(holding.newPrice);
+            //     });
+            // });
     }).then(()=>{
         User.updateOne({_id: objId}, {holdings: newHoldings}, (err, status)=>{
             console.log(status);
