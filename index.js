@@ -4,7 +4,7 @@ const router = require('./src/routers/routers');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const loadBasicData = require('./src/utils/loadBasicData');
+//const loadBasicData = require('./src/utils/loadBasicData');
 
 // loadBasicData.getLatest;
 // loadBasicData.getTop;

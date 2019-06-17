@@ -38,7 +38,6 @@ router.post('/validation', (req, res)=>{
         password
     });
     newUser.save().then((user)=>{
-        console.log(user);
         let id = user._id.toString();
         res.redirect(`/${id}/dashboard`)
     }).catch((err)=>{
@@ -83,15 +82,17 @@ router.get('/:id/dashboard', (req, res)=>{
         let totalValue = 0;
         let totalValueHistorical = 0;
         let profit = 0;
+        let rateOfreturn = 0;
         //do all calculations and pass to dashboard
         const holdingsArr = Array.from(user.holdings);
         holdingsArr.forEach((holding)=>{
             totalValue+=parseFloat(holding.currentPrice);
             totalValueHistorical+=(parseFloat(holding.price) * parseFloat(holding.quantity));
-            
         });
+        profit = parseFloat(totalValueHistorical - totalValue);
+        rateOfreturn = profit/totalValueHistorical;
         profit = (parseFloat(totalValueHistorical - totalValue).toFixed(2)).toString();
-        res.render('dashboard', {total: totalValue, user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
+        res.render('dashboard', {rate: rateOfreturn.toFixed(2), total: totalValue.toFixed(2), user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
     });
 });
 //adding 
@@ -117,7 +118,6 @@ router.post('/addtoportfolio', (req, res)=>{
     try{
         Item.findOne({name: coin_name}, (err, item)=>{
             newHolding.currentPrice = parseFloat((item.quote * parseFloat(quantity))).toFixed(4);
-            console.log(newHolding);
         });
     }catch{
 
@@ -136,7 +136,6 @@ router.post('/addtoportfolio', (req, res)=>{
             // });
     }).then(()=>{
         User.updateOne({_id: objId}, {holdings: newHoldings}, (err, status)=>{
-            console.log(status);
         });
     }).then(()=>{
         res.redirect(`/${id}/dashboard`)

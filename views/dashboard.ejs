@@ -57,6 +57,7 @@
                                                     <p>Current Value</p>
                                                 </div>
                                     </div>
+                                    <div class="my-portfolio-assets">
                                     <%for(let i = 0; i<user.holdings.length; i++){%>
                                             <div class="crypto-portfolio-listing">
                                                     <div class="column">
@@ -74,13 +75,13 @@
                                                 </div>
                                     <%}%>
                                 <%}%>
-                                <form method="POST" action="/add">
-                                <input name="id" style="display: none" value="<%=user._id.toString()%>">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                </form>
-
+                                    </div>
                         </div>
                     </div>
+                    <form method="POST" action="/add">
+                        <input name="id" style="display: none" value="<%=user._id.toString()%>">
+                        <button type="submit" class="btn btn-primary" style="margin: 0.5rem">Add</button>
+                        </form>
             </div>
 
             <div class="dashboard-pnl-market">
@@ -105,7 +106,7 @@
                                     <div class="mpr_class">
                                             <div class="details-container">
                                                 <p>Rate of Return</p>
-                                                <p>34%</p>
+                                                <p><%=rate%>%</p>
                                             </div> 
                                         </div>
                                 </div>
