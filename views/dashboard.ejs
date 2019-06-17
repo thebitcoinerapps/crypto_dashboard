@@ -100,21 +100,20 @@
                                         <div class="mpr_column">
                                             <%for(let i = 0; i<5; i++){%>
                                                 <div class="img-top-gainer">
+                                                <div class="logo-and-des">
                                                 <img style="margin-right: 1rem" src=<%=topUrls[i].url%>>
                                                 <p><%=topGArr[i].name%></p>
+                                                </div>
                                                 <p class="last-item"><%=topGArr[i].percent_change_7d%>%</p>
                                                 </div>
                                             <%}%>
                                         </div>
                                         <div class="mpr_column">
-                                                <ul>
-                                                    <li>Bitcoin</li>
-                                                    <li>Bitcoin</li>
-                                                    <li>Bitcoin</li>
-                                                    <li>Bitcoin</li>
-                                                    <li>Bitcoin</li>
-                                                    <li>Bitcoin</li>
-                                                </ul>
+                                            <div class="bitcoin-data">
+                                            <img src="/bitcoin.png" alt="bitcoin image">
+                                            </div>
+                                            <p class="bitcoin-data-p">Current Price:  9547 USD</p>
+                                            <p class="bitcoin-data-p">7 day gain/loss: 4% </p>
                                         </div>
                                     </div>
                                 </div>

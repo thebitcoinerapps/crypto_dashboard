@@ -48,18 +48,33 @@ body{
 }
 .img-top-gainer{
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+
+.logo-and-des{
+    display: flex;
     justify-content: flex-start;
-    margin-bottom: 0.5rem;
 }
-.img-top-gainer>img{
+.logo-and-des>img{
     height: 2rem;
+
 }
-.img-top-gainer>p{
-    padding-top: 0.2rem;
+.logo-and-des>p{
+    padding-top: 0.1rem;
     margin-right: 0.5rem;
 }
-.last-item{
-justify-self: flex-end;
+.bitcoin-data{
+    width: 30%;
+    margin: 2px auto;
+}
+.bitcoin-data>img{
+    width: 100%;
+}
+.bitcoin-data-p{
+    text-align: center;
+    padding-top: 0.5rem;
+    font-size: 1.4rem;
 }
 
 /*add query to all boxes look the same*/
