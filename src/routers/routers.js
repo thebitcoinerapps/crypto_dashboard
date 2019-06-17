@@ -80,7 +80,18 @@ router.get('/:id/dashboard', (req, res)=>{
         topGainersUrlArr = topgainersUrls;
     });
     User.findById(req.params.id, (err, user)=>{
-        res.render('dashboard', {user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr});
+        let totalValue = 0;
+        let totalValueHistorical = 0;
+        let profit = 0;
+        //do all calculations and pass to dashboard
+        const holdingsArr = Array.from(user.holdings);
+        holdingsArr.forEach((holding)=>{
+            totalValue+=parseFloat(holding.currentPrice);
+            totalValueHistorical+=(parseFloat(holding.price) * parseFloat(holding.quantity));
+            
+        });
+        profit = (parseFloat(totalValueHistorical - totalValue).toFixed(2)).toString();
+        res.render('dashboard', {total: totalValue, user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
     });
 });
 //adding 

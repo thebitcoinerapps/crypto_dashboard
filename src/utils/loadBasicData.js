@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 //utils
 const getTopGainers = require('./getLatestHighetReturn');
 const getMeta = require('./getMetaData');
+const getLatest = require('./getLatest');
 
 //db
 const TopGainer = require('../db/models/listingHighestReturn');
@@ -9,6 +10,7 @@ const Url = require('../db/models/urls');
 
 //variables
 let topGainersArrayRaw = [];
+let listingArray = [];
 
 //connecting to database
 mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
@@ -20,7 +22,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
 });
 
 //getting top gainers
-module.exports = getTopGainers.then((response)=>{
+const getTop = getTopGainers.then((response)=>{
     topGainersArrayRaw = Array.from(JSON.parse(JSON.stringify(response.data.data)));
 
     topGainersArrayRaw.forEach((coin)=>{
@@ -48,3 +50,27 @@ module.exports = getTopGainers.then((response)=>{
 }).catch((error)=>{
     console.log(error);
 });
+//getting latest cryptoData
+const getLatestListing = getLatest.then((response)=>{
+    const listing = response.data.data;
+    listingArray = Array.from(JSON.parse(JSON.stringify(listing)));
+    listingArray.forEach((coin)=>{
+        const item = new Item({
+            coinId: coin.id,
+            name: coin.name,
+            symbol: coin.symbol,
+            quote: coin.quote.USD.price
+        });
+        item.save().then((item)=>{
+        }).catch((error)=>{
+            throw new Error('Saving not finished');
+        });
+    });
+}).catch((error)=>{
+    console.log(error);
+});
+
+module.exports = {
+    getTop: getTop,
+    getLatest: getLatestListing
+}
