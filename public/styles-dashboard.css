@@ -76,6 +76,13 @@ body{
     padding-top: 0.5rem;
     font-size: 1.4rem;
 }
+.pnl-container{
+    display: flex;
+    justify-content: space-between;
+}
+.details-container{
+    padding: 1rem;
+}
 
 /*add query to all boxes look the same*/
 

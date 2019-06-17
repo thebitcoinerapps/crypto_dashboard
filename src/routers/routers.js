@@ -102,9 +102,10 @@ router.post('/addtoportfolio', (req, res)=>{
     const newHolding = req.body;
     const {id} = req.body;
     const {coin_name} = req.body;
+    const {quantity} = req.body;
     try{
         Item.findOne({name: coin_name}, (err, item)=>{
-            newHolding.currentPrice = item.quote;
+            newHolding.currentPrice = parseFloat((item.quote * parseFloat(quantity))).toFixed(4);
             console.log(newHolding);
         });
     }catch{
