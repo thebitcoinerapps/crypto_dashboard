@@ -41,6 +41,9 @@
                         <div class="card-body" style="height: 100%">
                             <div class="top-portfolio">
                                 <h2>My portfolio</h2>
+                                <%if(user.holdings<1){%>
+                                        <p>Currently you have no assets</p>
+                                    <%}else{%>
                                 <div class="top-portfolio-row">
                                     <div class="column">
                                         <h5>Name</h5>
@@ -72,6 +75,7 @@
                                             </div>
                                         </div>
                                         <%}%>
+                                        <%}%>
                                 </div>
                             </div>
                             <div class="bottom-portfolio">
@@ -92,20 +96,20 @@
                                 <div class="pnl-container">
                                     <div class="mpr_class">
                                         <div class="details-container">
-                                            <p>Current Value of Portfolio</p>
+                                            <p>Portfolio Value</p>
                                             <p><%=total%> USD</p>
                                         </div>
                                         
                                     </div>
                                     <div class="mpr_class">
                                         <div class="details-container">
-                                            <p>Profit/Loss</p>
+                                            <p>PnL</p>
                                             <p><%=profit%> USD</p>
                                         </div> 
                                     </div>
                                     <div class="mpr_class">
                                             <div class="details-container">
-                                                <p>Rate of Return</p>
+                                                <p>Return</p>
                                                 <p><%=rate%>%</p>
                                             </div> 
                                         </div>
@@ -133,12 +137,11 @@
                                                 </div>
                                             <%}%>
                                         </div>
-                                        <div class="mpr_column">
+                                        <div class="mpr_column phone">
                                             <div class="bitcoin-data">
                                             <img src="/bitcoin.png" alt="bitcoin image">
                                             </div>
-                                            <p class="bitcoin-data-p">Current Price:  9547 USD</p>
-                                            <p class="bitcoin-data-p">7 day gain/loss: 4% </p>
+                                            <p class="bitcoin-data-p">Current Price:  <%=bitcoinPrice.price%> USD</p>
                                         </div>
                                     </div>
                                 </div>

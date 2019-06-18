@@ -72,6 +72,12 @@ router.post('/login', (req, res)=>{
 //daschboard
 
 router.get('/:id/dashboard', (req, res)=>{
+    let bitcoin = {};
+    Item.findOne({name: "Bitcoin"}, (err, coin)=>{
+        let price = parseFloat(coin.quote).toFixed(2);
+        bitcoin.price = price;
+    });
+
     topGainersDB.find({}, (err, topgainers)=>{
         topGainersArr = topgainers;
     });
@@ -92,7 +98,7 @@ router.get('/:id/dashboard', (req, res)=>{
         profit = parseFloat(totalValueHistorical - totalValue);
         rateOfreturn = profit/totalValueHistorical;
         profit = (parseFloat(totalValueHistorical - totalValue).toFixed(2)).toString();
-        res.render('dashboard', {rate: rateOfreturn.toFixed(2), total: totalValue.toFixed(2), user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
+        res.render('dashboard', {bitcoinPrice: bitcoin, rate: rateOfreturn.toFixed(2), total: totalValue.toFixed(2), user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
     });
 });
 //adding 

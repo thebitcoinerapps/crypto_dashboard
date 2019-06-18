@@ -37,10 +37,6 @@ body{
 .bottom-portfolio{
     height: 10%;
 }
-
-
-
-
 .dashboard-portfolio{
     width: 40%;
 }
@@ -134,5 +130,41 @@ body{
     }
     .dashboard-pnl{
         margin-bottom: 0.5rem;
+    }
+    .market-preview-container{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .logo-and-des>p{
+        width: 150px;
+    }
+    .bitcoin-data{
+        width: 50%;
+        margin: 0.5rem auto;
+    }
+    .phone{
+        margin: 0 auto;
+    }
+    .pnl-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .details-container{
+        display: flex;
+        font-size: 1rem;
+    }
+    .details-container>p{
+        width: 150px;
+    }
+    .top-portfolio>h2{
+        font-size: 1.5rem;
+    }
+    .column>h5{
+        font-size: 0.9rem;
+    }
+    .column>p{
+        font-size: 0.65rem;
     }
   }
