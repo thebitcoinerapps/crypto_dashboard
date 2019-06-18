@@ -38,50 +38,50 @@
 
             <div class="dashboard-portfolio">
                     <div class="card shadow-sm" style="width: 90%; margin: auto; height: 95%; margin-top: 0.4rem;">
-                        <div class="card-body">
-                                <h5 class="card-title">My Portfolio</h5>
-                                <%if(user.holdings<1){%>
-                                    <p>Currently you have no assets</p>
-                                <%}else{%>
-                                    <div class="crypto-portfolio-listing">
+                        <div class="card-body" style="height: 100%">
+                            <div class="top-portfolio">
+                                <h2>My portfolio</h2>
+                                <div class="top-portfolio-row">
+                                    <div class="column">
+                                        <h5>Name</h5>
+                                    </div>
+                                    <div class="column">
+                                        <h5>BUY price</h5>
+                                    </div>
+                                    <div class="column">
+                                        <h5>Quantity</h5>
+                                    </div>
+                                    <div class="column">
+                                        <h5>Value</h5>
+                                    </div>
+                                </div>
+                                <div class="top-portfolio-row-assets">
+                                        <%for(let i = 0; i<user.holdings.length; i++){%>
+                                            <div class="top-portfolio-row">
                                             <div class="column">
-                                                    <p>Name</p>
-                                                </div>
-                                                <div class="column">
-                                                    <p>BUY price</p>
-                                                </div>
-                                                <div class="column">
-                                                    <p>Quantity</p>
-                                                </div>
-                                                <div class="column">
-                                                    <p>Current Value</p>
-                                                </div>
-                                    </div>
-                                    <div class="my-portfolio-assets">
-                                    <%for(let i = 0; i<user.holdings.length; i++){%>
-                                            <div class="crypto-portfolio-listing">
-                                                    <div class="column">
-                                                        <p><%=user.holdings[i].coin_name%></p>
-                                                    </div>
-                                                    <div class="column">
-                                                        <p><%=user.holdings[i].price%></p>
-                                                    </div>
-                                                    <div class="column">
-                                                        <p><%=user.holdings[i].quantity%></p>
-                                                    </div>
-                                                    <div class="column">
-                                                        <p><%=user.holdings[i].currentPrice%></p>
-                                                    </div>
-                                                </div>
-                                    <%}%>
-                                <%}%>
-                                    </div>
+                                                <p><%=user.holdings[i].coin_name%></p>
+                                            </div>
+                                            <div class="column">
+                                                <p><%=user.holdings[i].price%></p>
+                                            </div>
+                                            <div class="column">
+                                                <p><%=user.holdings[i].quantity%></p>
+                                            </div>
+                                            <div class="column">
+                                                <p><%=user.holdings[i].currentPrice%></p>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                </div>
+                            </div>
+                            <div class="bottom-portfolio">
+                                    <form method="POST" action="/add">
+                                        <input name="id" style="display: none" value="<%=user._id.toString()%>">
+                                        <button type="submit" class="btn btn-primary" style="margin: 0.5rem">Add</button>
+                                    </form>
+                            </div>
                         </div>
                     </div>
-                    <form method="POST" action="/add">
-                        <input name="id" style="display: none" value="<%=user._id.toString()%>">
-                        <button type="submit" class="btn btn-primary" style="margin: 0.5rem">Add</button>
-                        </form>
             </div>
 
             <div class="dashboard-pnl-market">

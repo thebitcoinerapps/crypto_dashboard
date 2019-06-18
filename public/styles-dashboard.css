@@ -14,6 +14,33 @@ body{
     justify-content: space-between;
     height: 100%;
 }
+.top-portfolio{
+    height: 90%;
+}
+.top-portfolio-row{
+    display: flex;
+}
+.top-portfolio-row-assets{
+    height: 80%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  } 
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  }
+.bottom-portfolio{
+    height: 10%;
+}
+
+
+
+
 .dashboard-portfolio{
     width: 40%;
 }
