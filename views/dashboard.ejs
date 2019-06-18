@@ -71,12 +71,13 @@
                                                 <p><%=user.holdings[i].quantity%></p>
                                             </div>
                                             <div class="column">
-                                                <p><%=user.holdings[i].currentPrice%></p>
+                                                <p><%=parseFloat(user.holdings[i].currentPrice).toFixed(2)%></p>
                                             </div>
                                         </div>
                                         <%}%>
+                                    </div>
                                         <%}%>
-                                </div>
+                                
                             </div>
                             <div class="bottom-portfolio">
                                     <form method="POST" action="/add">
