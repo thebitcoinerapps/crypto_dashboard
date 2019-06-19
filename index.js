@@ -4,15 +4,15 @@ const router = require('./src/routers/routers');
 const app = express();
 const port = process.env.PORT || 3000;
 
-let control = true;
+let control = false;
 
-const loadBasicData = require('./src/utils/loadBasicData');
+// const loadBasicData = require('./src/utils/loadBasicData');
 
-    if(!control){
-        loadBasicData.getLatest;
-        loadBasicData.getTop;
-        control = true;
-    }
+//     if(!control){
+//         loadBasicData.getLatest;
+//         loadBasicData.getTop;
+//         control = true;
+//     }
 
 
 

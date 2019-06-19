@@ -5,6 +5,7 @@ const User = require('../db/models/user');
 const Item = require('../db/models/listing');
 const bcrypt = require('bcryptjs');
 
+
 let currentId = '';
 let cryptoNames = [];
 let newHoldings = [];
@@ -41,7 +42,6 @@ router.post('/validation', (req, res)=>{
         let id = user._id.toString();
         res.redirect(`/${id}/dashboard`)
     }).catch((err)=>{
-        console.log(err);
         res.render('loginPage', {msg: 'Users exists'});
     });
 });
@@ -69,10 +69,20 @@ router.post('/login', (req, res)=>{
                     res.render('loginPage', {msg: 'Wrong password'});
                 }
             }).catch((err)=>{
-                console.log(err);
             });}
     })});
 //daschboard
+
+router.get('/refresh', (req, res)=>{
+        Item.deleteMany({}, function (err) {});
+        topGainersDB.deleteMany({}, function(err){});
+        topGainersDBurls.deleteMany({}, function(err){});
+        res.redirect('/updateDbs');
+});
+router.get('/updateDbs', (req, res)=>{
+    //api call here
+});
+
 
 router.get('/:id/dashboard', (req, res)=>{
     let bitcoin = {};
@@ -137,12 +147,7 @@ router.post('/addtoportfolio', (req, res)=>{
     User.findOne({_id:objId}, (err, user)=>{
         newHoldings = Array.from(user.holdings);
         newHoldings.push(newHolding);
-            // newHoldings.forEach((holding)=>{
-            //     Item.findOne({name: holding.coin_name}, (err, coin)=>{
-            //         holding.newPrice = coin.quote;
-            //         console.log(holding.newPrice);
-            //     });
-            // });
+
     }).then(()=>{
         User.updateOne({_id: objId}, {holdings: newHoldings}, (err, status)=>{
         });

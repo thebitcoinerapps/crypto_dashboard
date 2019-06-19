@@ -18,7 +18,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
     useCreateIndex: true
 }, function(error){
     //connection error handling
-    console.log(error);
+    
 });
 
 //getting top gainers
@@ -48,7 +48,7 @@ const getTop = getTopGainers.then((response)=>{
 
 
 }).catch((error)=>{
-    console.log(error);
+    
 });
 //getting latest cryptoData
 const getLatestListing = getLatest.then((response)=>{
@@ -67,7 +67,6 @@ const getLatestListing = getLatest.then((response)=>{
         });
     });
 }).catch((error)=>{
-    console.log(error);
 });
 
 module.exports = {
