@@ -5,8 +5,8 @@ const Url = require('./src/db/models/urls');
 
 
 const getLatestListing = require('./src/utils/getLatest');
-const getLatestHighestReturn = require('./src/utils/getLatestHighetReturn');
-const getMetaData = require('./src/utils/getMetaData');
+// const getLatestHighestReturn = require('./src/utils/getLatestHighetReturn');
+// const getMetaData = require('./src/utils/getMetaData');
 
 /************mongose boiler plate */
 
@@ -78,3 +78,37 @@ mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
 // }).catch((error)=>{
 //     console.log(error);
 // });
+
+
+//playground
+
+const deleteUrl = async()=>{
+    const urls = await Url.deleteMany({},(err)=>{
+        if(!err){
+            console.log('Url deleted');
+        }
+    });
+    const highRet = await High_item.deleteMany({}, (err)=>{
+        if(!err){
+            console.log('Top gainers db removed');
+        }
+    });
+    const items = await Item.deleteMany({}, (err)=>{
+        if(!err){
+            console.log('Listing removed');
+        }
+    });
+}
+
+deleteUrl().then(()=>{
+}).catch((e)=>{
+    console.log(e);
+})
+
+
+const updateListing = async ()=>{
+   const data =  await getLatestListing;
+   return data;
+}
+
+console.log(updateListing().then((data)=>{console.log(data)}));
