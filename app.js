@@ -19,40 +19,42 @@ mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
 // getMetaData.then((response)=>{
 //     console.log(response);
 // });
+//Item.deleteMany({}, function (err) {});
+// Url.find({}, (err, doc)=>{
+// }).remove().exec();
+// High_item.deleteMany({}, function (err) {});
 
+// let highestReturnArr = [];
+// let symoblsArray = [];
 
+// getLatestHighestReturn.then((response)=>{
+//     const data = response.data.data;
+//     highestReturnArr = Array.from(JSON.parse(JSON.stringify(data)));
+//     highestReturnArr.forEach((coin)=>{
+//         symoblsArray.push(coin.symbol);
+//     });
+//     const symbols = symoblsArray.join();
+//     getMetaData(symbols).then((metaData)=>{
+//         const meta = metaData.data.data;
+//         const metaArr = JSON.parse(JSON.stringify(meta));
+//         //save url to photo to db
+//         symoblsArray.forEach((sym)=>{
+//             const url = new Url({
+//                 symbol: sym,
+//                 url: metaArr[sym].logo
+//             }).save();
+//         })
+//     });
 
-let highestReturnArr = [];
-let symoblsArray = [];
-
-getLatestHighestReturn.then((response)=>{
-    const data = response.data.data;
-    highestReturnArr = Array.from(JSON.parse(JSON.stringify(data)));
-    highestReturnArr.forEach((coin)=>{
-        symoblsArray.push(coin.symbol);
-    });
-    const symbols = symoblsArray.join();
-    getMetaData(symbols).then((metaData)=>{
-        const meta = metaData.data.data;
-        const metaArr = JSON.parse(JSON.stringify(meta));
-        //save url to photo to db
-        symoblsArray.forEach((sym)=>{
-            const url = new Url({
-                symbol: sym,
-                url: metaArr[sym].logo
-            }).save();
-        })
-    });
-
-    highestReturnArr.forEach((coin)=>{
-        const item = new High_item({
-            coinID: coin.id,
-            name: coin.name,
-            symbol: coin.symbol,
-            percent_change_7d: coin.quote.USD.percent_change_7d
-        }).save();
-    });
-})
+//     highestReturnArr.forEach((coin)=>{
+//         const item = new High_item({
+//             coinID: coin.id,
+//             name: coin.name,
+//             symbol: coin.symbol,
+//             percent_change_7d: coin.quote.USD.percent_change_7d
+//         }).save();
+//     });
+// })
 
 
 /************latest data API call */

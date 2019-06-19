@@ -56,6 +56,7 @@ router.post('/login', (req, res)=>{
         }
         user = user;
     }).then((user)=>{
+        if(user){
         const checkPass = async () => {
             let check = bcrypt.compare(password, user.password);
             return check;
@@ -67,7 +68,9 @@ router.post('/login', (req, res)=>{
                 }else{
                     res.render('loginPage', {msg: 'Wrong password'});
                 }
-            });
+            }).catch((err)=>{
+                console.log(err);
+            });}
     })});
 //daschboard
 

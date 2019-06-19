@@ -112,7 +112,7 @@ body{
 
 /*add query to all boxes look the same*/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1020px) {
     /* For mobile phones: */
     .main-dashboard{
       height: auto;
