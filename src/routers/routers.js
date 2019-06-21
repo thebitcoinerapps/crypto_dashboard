@@ -80,8 +80,7 @@ router.post('/login', (req, res)=>{
     })});
 //daschboard
 router.post('/refresh', (req, res)=>{
-    let currentId  = '5d0cadd469763a001797b095';
-    //let currentId = req.body.currentId;
+    let currentId = req.body.currentId;
     const updatedUrls = async (symbols)=>{
         const urls = await getUrls(symbols);
         return urls;
