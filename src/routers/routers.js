@@ -138,11 +138,9 @@ router.get('/:id/dashboard', (req, res)=>{
     let topGainersUrlArr = [];
     let bitcoin = {};
     Item.findOne({name: "Bitcoin"}, (err, coin)=>{
-        bitcoin.price = 0;
-        if(!coin){
+        if(!coin)
         let price = parseFloat(coin.quote).toFixed(2);
         bitcoin.price = price;
-        }
     }).then(()=>{
         topGainersDB.find({}, (err, topgainers)=>{
             topGainersArr = topgainers;
