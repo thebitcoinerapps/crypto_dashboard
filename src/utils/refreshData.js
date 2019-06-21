@@ -9,7 +9,7 @@ const getUrls = require('./getMetaData');
 
 /************mongose boiler plate */
 
-mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true
 });

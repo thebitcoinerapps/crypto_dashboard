@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-module.exports = mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
+module.exports = mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true
 });

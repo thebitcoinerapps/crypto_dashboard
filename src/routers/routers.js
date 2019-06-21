@@ -15,7 +15,9 @@ let cryptoNames = [];
 let newHoldings = [];
 let currentPrices = [];
 
-mongoose.connect('mongodb://127.0.0.1:27017/cryptodb', {
+//mongodb+srv://cryptodashboard:<password>@cluster0-dio5z.mongodb.net/test?retryWrites=true&w=majority
+//mongodb://127.0.0.1:27017/cryptodb
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true
 });
