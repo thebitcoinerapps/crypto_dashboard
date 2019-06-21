@@ -80,7 +80,8 @@ router.post('/login', (req, res)=>{
     })});
 //daschboard
 router.post('/refresh', (req, res)=>{
-    let currentId = req.body.currentId;
+    let currentId  = '5d0cadd469763a001797b095'
+    //let currentId = req.body.currentId;
     const updatedUrls = async (symbols)=>{
         const urls = await getUrls(symbols);
         return urls;
@@ -138,8 +139,11 @@ router.get('/:id/dashboard', (req, res)=>{
     let topGainersUrlArr = [];
     let bitcoin = {};
     Item.findOne({name: "Bitcoin"}, (err, coin)=>{
+        bitcoin.price = 0;
+        if(!coin){
         let price = parseFloat(coin.quote).toFixed(2);
         bitcoin.price = price;
+        }
     }).then(()=>{
         topGainersDB.find({}, (err, topgainers)=>{
             topGainersArr = topgainers;
