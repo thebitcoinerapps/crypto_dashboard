@@ -144,7 +144,6 @@ router.get('/:id/dashboard', (req, res)=>{
         }).then(()=>{
             Url.find({}, (err, topgainersUrls)=>{
                 topGainersUrlArr = topgainersUrls;
-                console.log(topgainersUrls);
             }).then(()=>{
                 User.findById(req.params.id, (err, user)=>{
                     let totalValue = 0;
@@ -157,14 +156,9 @@ router.get('/:id/dashboard', (req, res)=>{
                         totalValue+=parseFloat(holding.currentPrice);
                         totalValueHistorical+=(parseFloat(holding.price) * parseFloat(holding.quantity));
                     });
-                    profit = parseFloat(totalValueHistorical - totalValue);
+                    //profit = parseFloat(totalValueHistorical - totalValue);
+                    profit = (parseFloat(totalValue-totalValueHistorical).toFixed(2)).toString();
                     rateOfreturn = profit/totalValueHistorical;
-                    profit = (parseFloat(totalValueHistorical - totalValue).toFixed(2)).toString();
-                    console.log(topGainersUrlArr);
-                    // if(topGainersUrlArr.length = 0){
-                    //     console.log('Files not loaded');
-                    //         topGainersUrlArr = ['/','/','/','/','/',];
-                    // }
                     res.render('dashboard', {bitcoinPrice: bitcoin, rate: rateOfreturn.toFixed(2), total: totalValue.toFixed(2), user: user, topGArr: topGainersArr, topUrls: topGainersUrlArr, profit: profit});
                 });
             })
@@ -186,17 +180,23 @@ router.get('/addCrypto', (req, res)=>{
 })
 //handling added asset
 router.post('/addtoportfolio', (req, res)=>{
-
+    let newName = '';
     const newHolding = req.body;
     const {id} = req.body;
     const {coin_name} = req.body;
+    newName = coin_name;
+        if(coin_name === 'Binance'){
+            newName = 'Binance Coin';
+        }
     const {quantity} = req.body;
     try{
-        Item.findOne({name: coin_name}, (err, item)=>{
+        Item.findOne({name: newName}, (err, item)=>{
             newHolding.currentPrice = parseFloat((item.quote * parseFloat(quantity))).toFixed(4);
         });
-    }catch{
-
+    }catch{(e)=>{
+        console.log(e);
+    }
+        
     }
 
 
