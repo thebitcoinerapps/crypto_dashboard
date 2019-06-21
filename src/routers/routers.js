@@ -138,7 +138,6 @@ router.get('/:id/dashboard', (req, res)=>{
     let topGainersUrlArr = [];
     let bitcoin = {};
     Item.findOne({name: "Bitcoin"}, (err, coin)=>{
-        if(!coin)
         let price = parseFloat(coin.quote).toFixed(2);
         bitcoin.price = price;
     }).then(()=>{
