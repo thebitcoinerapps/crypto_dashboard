@@ -16,6 +16,6 @@
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "mongoose": "^5.5.13",
-    "validator": "^11.0.0"
+    "validator": "^13.7.0"
   }
 }
